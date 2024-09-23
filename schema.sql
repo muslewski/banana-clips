@@ -103,3 +103,19 @@ CREATE TABLE audio_assets (
   start_time NUMERIC(10, 2), -- Start time of the edited segment
   end_time NUMERIC(10, 2) -- End time of the edited segment
 );
+
+
+-- Posts table
+CREATE TABLE posts (
+    id SERIAL PRIMARY KEY,
+    project_id INTEGER REFERENCES projects(id) ON DELETE CASCADE,
+    social_media_account_id INTEGER REFERENCES social_media_accounts(id) ON DELETE SET NULL,
+    platform_name VARCHAR(50) REFERENCES social_media_accounts(platform_name),
+    post_title VARCHAR(255),
+    post_content TEXT NOT NULL,
+    post_url TEXT,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    scheduled_at TIMESTAMP WITH TIME ZONE,
+    published_at TIMESTAMP WITH TIME ZONE
+);
